@@ -1,4 +1,6 @@
-export default {
+import { defineNuxtConfig } from '@nuxt/bridge'
+
+export default defineNuxtConfig({
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
@@ -15,7 +17,7 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: ['~/assets/scss/_all.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
@@ -40,8 +42,11 @@ export default {
     manifest: {
       lang: 'en',
     },
+    // icon: {
+    //   source: 'RLD-ICON.jpg',
+    // },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
-}
+})

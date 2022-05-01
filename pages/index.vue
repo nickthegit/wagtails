@@ -1,5 +1,5 @@
 <template>
-  <Tutorial />
+  <main><h1>Hi there david and frank</h1></main>
 </template>
 
 <script>
