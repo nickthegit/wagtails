@@ -43,6 +43,7 @@ header {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 90;
 }
 #brand {
   width: 16rem;

@@ -92,7 +92,7 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  &.nuxt-link-active {
+  &.nuxt-link-exact-active {
     color: var(--color-primary);
     svg {
       fill: var(--color-primary);

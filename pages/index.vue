@@ -4,6 +4,7 @@
       <span>Beautiful</span> 2 Bedroom, Detached Country Holiday Let in
       <span>Stunning</span> Dorset
     </h1>
+    <elements-image-grid-layout />
   </main>
 </template>
 
@@ -22,13 +23,16 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
+  overflow: hidden;
 }
 h1 {
+  text-align: center;
   width: 100%;
   max-width: 990px;
+  position: relative;
   display: block;
   font-size: var(--h1-sizing);
+  z-index: 2;
   span {
     color: var(--color-primary);
   }
