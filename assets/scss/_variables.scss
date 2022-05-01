@@ -1,17 +1,41 @@
+:root {
+  --size-relativity: 62.5%;
+  // colors
+  --indian-red: #cd5c5c;
+  --light-grey: #f2f0f0;
+  --black: #000;
+  --white: #fff;
+  --grey: #898989;
+  // vars
+  --color-primary: var(--indian-red);
+  --foreground-color: var(--black);
+  --background-color: var(--light-grey);
+  --edge-spacing: 2rem;
+  // fonts
+  --h1-sizing: 8rem;
+}
+
+@media screen and (max-width: 768px) {
+  :root {
+    --size-relativity: 50%;
+    --h1-sizing: 4.4rem;
+  }
+}
+
 // ========================================
 // Colors
 // ========================================
-$black	: #000000;
-$white 	: #FFFFFF;
+$black: #000000;
+$white: #ffffff;
 
-$primary : indianred;
+$primary: indianred;
 
 // ========================================
 // Screen sizes
 // ========================================
-$mobile  :		480px;
-$tablet  :		769px;
-$desktop : 		1000px;
-$fullhd  :		1384px;
+$mobile: 480px;
+$tablet: 769px;
+$desktop: 1000px;
+$fullhd: 1384px;
 
 $headerHeight: 80px;

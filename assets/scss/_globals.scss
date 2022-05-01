@@ -1,5 +1,12 @@
+html {
+  font-size: var(--size-relativity);
+}
 body {
-  &.navOpen {
-    overflow: hidden;
-  }
+  background-color: var(--background-color);
+  color: var(--foreground-color);
+}
+
+svg,
+img {
+  width: 100%;
 }
