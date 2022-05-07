@@ -6,11 +6,16 @@ export default defineNuxtConfig({
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'wagtails',
+    title: 'Wagtails',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          'Beautiful 2 Bedroom, Detached Country Holiday Let in Stunning Dorset',
+      },
       { name: 'format-detection', content: 'telephone=no' },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
@@ -42,9 +47,12 @@ export default defineNuxtConfig({
     manifest: {
       lang: 'en',
     },
-    // icon: {
-    //   source: 'RLD-ICON.jpg',
-    // },
+    icon: {
+      source: 'wag-icon.png',
+    },
+    meta: {
+      title: 'Wgatials',
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

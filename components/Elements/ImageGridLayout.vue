@@ -79,7 +79,7 @@ section {
   top: 0;
   left: 0;
   opacity: 0.25;
-  overflow: scroll;
+  // overflow: scroll;
 }
 .imgae-grid-wrap {
   width: 420rem;
