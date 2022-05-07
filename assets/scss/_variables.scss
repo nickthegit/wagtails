@@ -11,14 +11,22 @@
   --foreground-color: var(--black);
   --background-color: var(--light-grey);
   --edge-spacing: 2rem;
+  --margin-spacing: 2rem;
+  --big-container: 1600px;
+  --small-container: 800px;
   // fonts
   --h1-sizing: 8rem;
+  --h2-sizing: 4rem;
+  --h4-sizing: 2.8rem;
+  --p-sizing: 1.8rem;
 }
 
 @media screen and (max-width: 768px) {
   :root {
     --size-relativity: 40%;
     --h1-sizing: 4.4rem;
+    --p-sizing: 2.8rem;
+    --margin-spacing: 4rem;
   }
 }
 

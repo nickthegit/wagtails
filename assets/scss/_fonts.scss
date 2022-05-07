@@ -16,3 +16,7 @@
 body {
   font-family: 'Questrial', sans-serif;
 }
+p {
+  font-size: var(--p-sizing);
+  line-height: calc(var(--p-sizing) + 0.4rem);
+}

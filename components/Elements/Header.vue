@@ -22,6 +22,7 @@
     </nuxt-link>
     <a
       id="book-now"
+      class="btn"
       href="https://www.airbnb.co.uk/rooms/51009780"
       target="_blank"
       rel="noopener noreferrer"
@@ -54,20 +55,9 @@ header {
   display: block;
 }
 #book-now {
-  width: auto;
   position: absolute;
   top: 50%;
   right: var(--edge-spacing);
   transform: translateY(-50%);
-  text-decoration: none;
-  color: var(--white);
-  background-color: var(--color-primary);
-  text-transform: uppercase;
-  font-size: 2rem;
-  padding: 1.2rem 5rem;
-  border-radius: 1.3rem;
-  &:hover {
-    opacity: 0.75;
-  }
 }
 </style>
