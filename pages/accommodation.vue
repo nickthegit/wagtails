@@ -206,12 +206,12 @@ main {
   position: relative;
   top: 0;
   left: 0;
-  padding-top: (7 / 16) * 100%;
+  padding-top: calc((7 / 16) * 100%);
   z-index: 1;
   border-radius: calc(var(--edge-spacing) * 2);
   overflow: hidden;
   @media screen and (max-width: 768px) {
-    padding-top: (3 / 4) * 100%;
+    padding-top: calc((3 / 4) * 100%);
   }
 }
 .info-strap {
