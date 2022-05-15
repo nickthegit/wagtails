@@ -17,9 +17,9 @@
     </article>
     <section class="card-grid">
       <div class="filter-strap">
-        <label for="filter">Filter:</label>
+        <label for="filter">Filter Type:</label>
         <div class="filter-container">
-          <select id="filter" name="filter" v-model="selectedTag">
+          <select id="filter" v-model="selectedTag" name="filter">
             <option value="all">All</option>
             <option v-for="tag in tags" :key="tag" :value="tag">
               {{ tag }}
