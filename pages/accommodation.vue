@@ -2,7 +2,7 @@
   <main>
     <section class="slider-outer-container">
       <div class="slider-inner-container">
-        <Slider>
+        <hero-slider>
           <div
             v-for="img in images"
             :key="img"
@@ -34,7 +34,7 @@
               />
             </picture>
           </div>
-        </Slider>
+        </hero-slider>
       </div>
       <section class="info-strap">
         <ul>
@@ -157,10 +157,10 @@
 </template>
 
 <script>
-import Slider from '~/components/Elements/Slider.vue'
+import HeroSlider from '~/components/Elements/HeroSlider.vue'
 export default {
   name: 'AccommodationPage',
-  components: { Slider },
+  components: { HeroSlider },
   data() {
     return {
       images: [
