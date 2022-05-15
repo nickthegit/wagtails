@@ -1,6 +1,4 @@
-import { defineNuxtConfig } from '@nuxt/bridge'
-
-export default defineNuxtConfig({
+export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
@@ -39,22 +37,24 @@ export default defineNuxtConfig({
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/pwa
-    '@nuxtjs/pwa',
+    // '@nuxtjs/pwa',
   ],
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
-  pwa: {
-    manifest: {
-      lang: 'en',
-    },
-    icon: {
-      source: 'wag-icon.png',
-    },
-    meta: {
-      title: 'Wgatials',
-    },
-  },
+  // pwa: {
+  //   manifest: {
+  //     lang: 'en',
+  //   },
+  //   icon: {
+  //     source: 'wag-icon.png',
+  //   },
+  //   meta: {
+  //     title: 'Wgatials',
+  //   },
+  // },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
-})
+  build: {
+    // transpile: ['swiper'],
+  },
+}

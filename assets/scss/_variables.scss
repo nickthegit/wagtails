@@ -17,8 +17,11 @@
   // fonts
   --h1-sizing: 8rem;
   --h2-sizing: 4rem;
+  --h3-sizing: 3.2rem;
   --h4-sizing: 2.8rem;
+  --h5-sizing: 2.2rem;
   --p-sizing: 1.8rem;
+  --sm-sizing: 1.4rem;
 }
 
 @media screen and (max-width: 768px) {
@@ -26,6 +29,7 @@
     --size-relativity: 40%;
     --h1-sizing: 4.4rem;
     --p-sizing: 2.8rem;
+    --sm-sizing: 2rem;
     --margin-spacing: 4rem;
   }
 }

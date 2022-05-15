@@ -4,9 +4,15 @@
       <section id="contact">
         <h1>Contact</h1>
         <address>
-          <p>adress here</p>
-          <a href="mailto:">email@barb.com</a>
-          <a href="tel:+44 07867546">073543510658</a>
+          <p>
+            Wagtails, <br />
+            {{ address.street }}, <br />
+            {{ address.city }}, <br />
+            {{ address.state }}<br />
+            {{ address.zip }}
+          </p>
+          <a :href="`mailto:${email}`">{{ email }}</a>
+          <a :href="`tel:${phone}`">{{ phone }}</a>
         </address>
         <section>
           <h2>Directions</h2>
@@ -24,7 +30,14 @@
           </p>
         </section>
       </section>
-      <aside>map</aside>
+      <aside keep-alive>
+        <iframe
+          src="https://snazzymaps.com/embed/394089"
+          width="100%"
+          height="600px"
+          style="border: none"
+        ></iframe>
+      </aside>
     </article>
   </main>
 </template>
@@ -32,13 +45,29 @@
 <script>
 export default {
   name: 'ContactPage',
+  data() {
+    return {
+      address: {
+        street: 'Penmore Rd',
+        city: 'Sherborne',
+        state: 'Dorset',
+        zip: 'DT9 4SE',
+      },
+      email: 'barb@wagtails.com',
+      phone: '07867654665',
+      map: {
+        lat: 51.454545,
+        lng: -2.585278,
+      },
+    }
+  },
 }
 </script>
 
 <style lang="scss" scoped>
 main {
   width: 100%;
-  padding: calc(var(--edge-spacing) * 3) 0 calc(var(--margin-spacing) * 8) 0;
+  padding: calc(var(--edge-spacing) * 5) 0 calc(var(--margin-spacing) * 8) 0;
 }
 article {
   width: 100%;
@@ -60,7 +89,7 @@ article {
     margin-bottom: var(--margin-spacing);
   }
   a {
-    margin-top: calc(var(--margin-spacing) * 2);
+    margin-top: calc(var(--margin-spacing));
   }
 }
 #contact {
@@ -71,6 +100,12 @@ article {
     background: var(--white);
     padding: var(--edge-spacing);
     border-radius: var(--edge-spacing);
+    a {
+      color: var(--color-primary);
+      text-decoration: none;
+      font-size: var(--p-sizing);
+      display: block;
+    }
   }
   section {
     padding: var(--edge-spacing) 0;
@@ -81,7 +116,6 @@ aside {
   grid-row: 1 / 2;
   grid-column: 2 / 3;
   height: 600px;
-  border: solid 2px pink;
 }
 @media screen and (max-width: 1024px) {
   article {

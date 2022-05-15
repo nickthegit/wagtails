@@ -1,6 +1,6 @@
 <template>
   <main>
-    <article>
+    <article class="intro">
       <h1>Things To Do</h1>
       <p>
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsa iusto
@@ -15,12 +15,43 @@
         officia perferendis obcaecati.
       </p>
     </article>
-    <section>
+    <section class="card-grid">
       <div class="filter-strap">
-        <h4>Filter:</h4>
-        <div class="filter-container"></div>
+        <label for="filter">Filter:</label>
+        <div class="filter-container">
+          <select id="filter" name="filter" v-model="selectedTag">
+            <option value="all">All</option>
+            <option v-for="tag in tags" :key="tag" :value="tag">
+              {{ tag }}
+            </option>
+          </select>
+        </div>
       </div>
-      <article v-for="card in items" :key="card" class="card"></article>
+      <article v-for="card in filteredAttractions" :key="card._id" class="card">
+        <section class="feature-image">
+          <img :src="card.image" :alt="`${card.name} imagery`" />
+        </section>
+        <section class="info">
+          <h2>{{ card.name }}</h2>
+          <h3>{{ card.location }}</h3>
+          <div class="tags">
+            <span v-for="tag in card.attractionType" :key="tag">{{ tag }}</span>
+          </div>
+          <p>{{ card.description }}</p>
+          <div class="website">
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                <path
+                  d="M22.5 34H14q-4.25 0-7.125-2.875T4 24q0-4.25 2.875-7.125T14 14h8.5v3H14q-3 0-5 2t-2 5q0 3 2 5t5 2h8.5Zm-6.25-8.5v-3h15.5v3ZM25.5 34v-3H34q3 0 5-2t2-5q0-3-2-5t-5-2h-8.5v-3H34q4.25 0 7.125 2.875T44 24q0 4.25-2.875 7.125T34 34Z"
+                />
+              </svg>
+            </span>
+            <a :href="card.website" target="_blank" rel="noopener noreferrer">{{
+              card.website
+            }}</a>
+          </div>
+        </section>
+      </article>
     </section>
   </main>
 </template>
@@ -30,7 +61,72 @@ export default {
   data() {
     return {
       items: 16,
+      tags: [
+        'food',
+        'drinks',
+        'shopping',
+        'sightseeing',
+        'nightlife',
+        'culture',
+        'nature',
+        'outdoors',
+        'adventure',
+        'art',
+        'music',
+        'sports',
+        'wellbeing',
+        'beach',
+        'walking',
+        'park',
+      ],
+      selectedTag: 'all',
+      attractions: [
+        {
+          name: 'The Old Brewery',
+          _id: '4RjCc41y',
+          attractionType: ['food', 'beach', 'walking'],
+          image:
+            'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+          description:
+            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa iusto possimus perspiciatis animi totam. Ullam officia, numquam, expedita cupiditate voluptatibus dolores esse quidem architecto sed nulla magni laudantium facere! Earum?',
+          location: 'Sherborne',
+          website: 'https://www.theoldbrewery.co.uk/',
+        },
+        {
+          name: 'Hell House',
+          _id: 'GexI395PLjWCFtq',
+          attractionType: ['beach', 'national park', 'park', 'activity'],
+          image:
+            'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+          description:
+            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa iusto possimus perspiciatis animi totam. Ullam officia, numquam, expedita cupiditate voluptatibus dolores esse quidem architecto sed nulla magni laudantium facere! Earum?',
+          location: 'Yeovil',
+          website: 'https://www.hellhouse.co.uk/',
+        },
+        {
+          name: 'Spa',
+          _id: '6yn3KMUwW5IVx2nnwjIv',
+          attractionType: ['entertainment', 'market', 'exhibition', 'sport'],
+          image:
+            'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+          description:
+            'Ullam officia, numquam, expedita cupiditate voluptatibus dolores esse quidem architecto sed nulla magni laudantium facere! Earum?',
+          location: 'Bath',
+          website: '',
+        },
+      ],
     }
+  },
+  computed: {
+    filteredAttractions() {
+      if (this.selectedTag === 'all') {
+        return this.attractions
+      } else {
+        return this.attractions.filter((attraction) => {
+          return attraction.attractionType.includes(this.selectedTag)
+        })
+      }
+    },
   },
 }
 </script>
@@ -38,9 +134,9 @@ export default {
 <style lang="scss" scoped>
 main {
   width: 100%;
-  padding: calc(var(--edge-spacing) * 3) 0 calc(var(--margin-spacing) * 8) 0;
+  padding: calc(var(--edge-spacing) * 5) 0 calc(var(--margin-spacing) * 8) 0;
 }
-article {
+.intro {
   width: 100%;
   max-width: var(--small-container);
   padding: var(--edge-spacing);
@@ -66,7 +162,7 @@ article {
     }
   }
 }
-section {
+.card-grid {
   width: 100%;
   max-width: var(--big-container);
   position: relative;
@@ -81,26 +177,107 @@ section {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    margin-bottom: 20px;
     .filter-container {
-      width: 300px;
-      height: 80px;
+      width: 200px;
+      height: 50px;
       background: var(--white);
       border-radius: var(--edge-spacing);
-      margin-bottom: 20px;
+      position: relative;
     }
-    h4 {
+    select {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      border: 1px solid var(--color-primary);
+      padding: calc(var(--edge-spacing) / 2);
+      border-radius: var(--edge-spacing);
+      font-size: var(--p-sizing);
+      -webkit-appearance: none;
+      background: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0Ljk1IDEwIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2ZmZjt9LmNscy0ye2ZpbGw6IzQ0NDt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPmFycm93czwvdGl0bGU+PHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iNC45NSIgaGVpZ2h0PSIxMCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIxLjQxIDQuNjcgMi40OCAzLjE4IDMuNTQgNC42NyAxLjQxIDQuNjciLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMy41NCA1LjMzIDIuNDggNi44MiAxLjQxIDUuMzMgMy41NCA1LjMzIi8+PC9zdmc+)
+        no-repeat 95% 50%;
+    }
+    label {
       color: var(--grey);
       margin-right: var(--edge-spacing);
       font-size: var(--h4-sizing);
     }
   }
   .card {
-    // width: 100%;
-    height: 600px;
     background: var(--white);
     grid-column: span 1;
     box-shadow: 0px 4px 12px 4px rgba(0, 0, 0, 0.06);
     border-radius: calc(var(--edge-spacing) * 2);
+    overflow: hidden;
+    .feature-image {
+      width: 100%;
+      height: 0;
+      position: relative;
+      overflow: hidden;
+      padding-bottom: 56.25%;
+      img {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        object-fit: cover;
+      }
+    }
+    .info {
+      padding: var(--edge-spacing);
+      display: flex;
+      flex-direction: column;
+      gap: calc(var(--edge-spacing) / 2);
+      h2 {
+        font-size: var(--h2-sizing);
+      }
+      h3 {
+        font-size: var(--h5-sizing);
+        color: var(--grey);
+      }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: calc(var(--edge-spacing) / 2);
+        span {
+          padding: calc(var(--edge-spacing) / 3) calc(var(--edge-spacing) / 2);
+          border-radius: var(--edge-spacing);
+          display: block;
+          // background: var(--color-primary);
+          border: 1px solid var(--color-primary);
+          color: var(--white);
+          color: var(--color-primary);
+          font-size: var(--sm-sizing);
+          line-height: var(--sm-sizing);
+        }
+      }
+      .website {
+        display: block;
+        display: flex;
+        align-items: center;
+        gap: calc(var(--edge-spacing) / 3);
+        span {
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          // background: indigo;
+          svg {
+            width: 100%;
+            height: 100%;
+            fill: var(--color-primary);
+          }
+        }
+        a {
+          font-size: var(--sm-sizing);
+          color: var(--color-primary);
+          text-decoration: none;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
   }
   @media screen and (max-width: 1024px) {
     grid-template: auto auto / 1fr 1fr;
@@ -114,8 +291,8 @@ section {
       grid-column: 1 / 2;
     }
     .filter-strap {
-      flex-direction: column;
-      align-items: flex-end;
+      // flex-direction: column;
+      // align-items: flex-end;
     }
   }
 }
