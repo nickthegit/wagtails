@@ -10,6 +10,12 @@ import category from './category'
 import post from './post'
 import author from './author'
 import settings from './settings'
+import home from './home'
+import accommodation from './accommodation'
+import thingsToDo from './things-to-do'
+import contact from './contact'
+import attractionType from './attractionType'
+import attraction from './attraction'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -20,10 +26,16 @@ export default createSchema({
   types: schemaTypes.concat([
     // The following are document types which will appear
     // in the studio.
-    post,
-    author,
-    category,
+    // post,
+    // author,
+    // category,
     settings,
+    home,
+    accommodation,
+    thingsToDo,
+    contact,
+    attractionType,
+    attraction,
     // When added to this list, object types can be used as
     // { type: 'typename' } in other document schemas
     blockContent,

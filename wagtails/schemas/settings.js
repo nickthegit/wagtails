@@ -29,6 +29,12 @@ export default {
         },
       ],
     },
+    {
+      name: 'bookingUrl',
+      title: 'Booking URL',
+      type: 'url',
+      initialValue: 'https://www.airbnb.co.uk/rooms/51009780',
+    },
   ],
   preview: {
     select: {
