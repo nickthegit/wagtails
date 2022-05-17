@@ -1,66 +1,7 @@
 <template>
   <section>
     <div class="imgae-grid-wrap">
-      <img
-        src="@/assets/images/grid/1fbd20ed-1d44-4d70-a8c1-563c310edfaa.jpg"
-        alt=""
-      />
-      <img
-        src="@/assets/images/grid/8e19ed20-9d94-4a9e-b0d0-df9c95df392b.jpg"
-        alt=""
-      />
-      <img
-        src="@/assets/images/grid/56692bc4-3cf8-41dc-823b-6841b1be0bb1.jpg"
-        alt=""
-      />
-      <img
-        src="@/assets/images/grid/3e2e9392-648e-48c6-9a28-880a214e2cb8.jpg"
-        alt=""
-      />
-      <img
-        src="@/assets/images/grid/8739a0d4-5bcd-4da3-a1c7-3c8056e0f201.jpg"
-        alt=""
-      />
-      <img
-        src="@/assets/images/grid/9847a6de-05cd-4463-b808-4943ce547ae9.jpg"
-        alt=""
-      />
-      <img
-        src="@/assets/images/grid/97568ab0-2251-4f90-9958-b4dd862731b7.jpg"
-        alt=""
-      />
-      <img
-        src="@/assets/images/grid/c78ff36b-4529-47cc-ab0e-5912e28c4e54.jpg"
-        alt=""
-      />
-      <img
-        src="@/assets/images/grid/20bdfc26-71c1-4534-aa7a-bde28f130211.jpg"
-        alt=""
-      />
-      <img
-        src="@/assets/images/grid/c221dfd3-7f68-4134-b6ee-183b2fe81a99.jpg"
-        alt=""
-      />
-      <img
-        src="@/assets/images/grid/8a13d62d-84f4-44ac-8432-3ded3ba08dd1.jpg"
-        alt=""
-      />
-      <img
-        src="@/assets/images/grid/80a0c457-32bd-4b9f-a418-d129a689902c.jpg"
-        alt=""
-      />
-      <img
-        src="@/assets/images/grid/c45d79c7-d5ef-402a-94d9-0f232fda82b1.jpg"
-        alt=""
-      />
-      <img
-        src="@/assets/images/grid/ed950abb-3fb2-4fe3-8adc-7a0e7e7d886f.jpg"
-        alt=""
-      />
-      <img
-        src="@/assets/images/grid/7e3040a6-1bb3-4698-b7bc-33aa75b213f9.jpg"
-        alt=""
-      />
+      <slot></slot>
     </div>
   </section>
   <!-- /0000ff -->

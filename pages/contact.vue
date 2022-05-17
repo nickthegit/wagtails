@@ -4,30 +4,13 @@
       <section id="contact">
         <h1>Contact</h1>
         <address>
-          <p>
-            Wagtails, <br />
-            {{ address.street }}, <br />
-            {{ address.city }}, <br />
-            {{ address.state }}<br />
-            {{ address.zip }}
-          </p>
-          <a :href="`mailto:${email}`">{{ email }}</a>
-          <a :href="`tel:${phone}`">{{ phone }}</a>
+          <SanityContent :blocks="data.address" />
+          <a :href="`mailto:${data.email}`">{{ data.email }}</a>
+          <a :href="`tel:${data.phone}`">{{ data.phone }}</a>
         </address>
         <section>
           <h2>Directions</h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo a
-            tempore sunt fugit nisi sequi, nihil ab, quam aperiam et culpa
-            inventore impedit quis corrupti sed fuga provident nostrum
-            similique.
-          </p>
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo
-            labore, consectetur repellendus deleniti fugit nisi unde doloremque
-            repellat maiores sint obcaecati maxime? Ex assumenda deserunt,
-            minima aliquid labore illo itaque?
-          </p>
+          <SanityContent :blocks="data.directions" />
         </section>
       </section>
       <aside keep-alive>
@@ -43,23 +26,16 @@
 </template>
 
 <script>
+const query = `*[_type == 'contact']`
 export default {
   name: 'ContactPage',
-  data() {
-    return {
-      address: {
-        street: 'Penmore Rd',
-        city: 'Sherborne',
-        state: 'Dorset',
-        zip: 'DT9 4SE',
-      },
-      email: 'barb@wagtails.com',
-      phone: '07867654665',
-      map: {
-        lat: 51.454545,
-        lng: -2.585278,
-      },
-    }
+  async asyncData({ $sanity }) {
+    const req = await $sanity.fetch(query)
+    return { data: req[0] }
+  },
+  data() {},
+  mounted() {
+    console.log(this.data)
   },
 }
 </script>
@@ -105,6 +81,9 @@ article {
       text-decoration: none;
       font-size: var(--p-sizing);
       display: block;
+    }
+    p {
+      margin-bottom: 0;
     }
   }
   section {

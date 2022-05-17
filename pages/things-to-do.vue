@@ -1,19 +1,8 @@
 <template>
   <main>
     <article class="intro">
-      <h1>Things To Do</h1>
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsa iusto
-        possimus perspiciatis animi totam. Ullam officia, numquam, expedita
-        cupiditate voluptatibus dolores esse quidem architecto sed nulla magni
-        laudantium facere! Earum?
-      </p>
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusantium
-        libero aut aspernatur nemo necessitatibus voluptatibus deserunt
-        provident eos esse quis impedit beatae quos, ipsum, eveniet quibusdam ad
-        officia perferendis obcaecati.
-      </p>
+      <h1>{{ data.title }}</h1>
+      <SanityContent :blocks="data.intro" />
     </article>
     <section class="card-grid">
       <div class="filter-strap">
@@ -21,24 +10,33 @@
         <div class="filter-container">
           <select id="filter" v-model="selectedTag" name="filter">
             <option value="all">All</option>
-            <option v-for="tag in tags" :key="tag" :value="tag">
-              {{ tag }}
+            <option
+              v-for="tag in filteredTags"
+              :key="tag._id"
+              :value="tag.name"
+            >
+              {{ tag.name }}
             </option>
           </select>
         </div>
       </div>
       <article v-for="card in filteredAttractions" :key="card._id" class="card">
         <section class="feature-image">
-          <img :src="card.image" :alt="`${card.name} imagery`" />
+          <img
+            :src="$imgUrl(card.image).width(500).url()"
+            :alt="`${card.name} imagery`"
+          />
         </section>
         <section class="info">
           <h2>{{ card.name }}</h2>
           <h3>{{ card.location }}</h3>
           <div class="tags">
-            <span v-for="tag in card.attractionType" :key="tag">{{ tag }}</span>
+            <span v-for="tag in card.attractionType" :key="tag._id">{{
+              tag.name
+            }}</span>
           </div>
           <p>{{ card.description }}</p>
-          <div class="website">
+          <div v-if="card.website" class="website">
             <span>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
                 <path
@@ -57,7 +55,29 @@
 </template>
 
 <script>
+const query = `*[_type == 'things-to-do'] {
+    _id,
+    intro,
+    title,
+    "attractionType": *[_type == 'attractionType'],
+    "attraction": *[_type == 'attraction'] {
+      _id,
+      _rev,
+      "attractionType":attractionType[]->,
+      description,
+      image,
+      location,
+      name,
+      slug,
+      "website": coalesce(website, false)
+    }
+  }`
+
 export default {
+  async asyncData({ $sanity }) {
+    const req = await $sanity.fetch(query)
+    return { data: req[0] }
+  },
   data() {
     return {
       items: 16,
@@ -80,53 +100,44 @@ export default {
         'park',
       ],
       selectedTag: 'all',
-      attractions: [
-        {
-          name: 'The Old Brewery',
-          _id: '4RjCc41y',
-          attractionType: ['food', 'beach', 'walking'],
-          image:
-            'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-          description:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa iusto possimus perspiciatis animi totam. Ullam officia, numquam, expedita cupiditate voluptatibus dolores esse quidem architecto sed nulla magni laudantium facere! Earum?',
-          location: 'Sherborne',
-          website: 'https://www.theoldbrewery.co.uk/',
-        },
-        {
-          name: 'Hell House',
-          _id: 'GexI395PLjWCFtq',
-          attractionType: ['beach', 'national park', 'park', 'activity'],
-          image:
-            'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-          description:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa iusto possimus perspiciatis animi totam. Ullam officia, numquam, expedita cupiditate voluptatibus dolores esse quidem architecto sed nulla magni laudantium facere! Earum?',
-          location: 'Yeovil',
-          website: 'https://www.hellhouse.co.uk/',
-        },
-        {
-          name: 'Spa',
-          _id: '6yn3KMUwW5IVx2nnwjIv',
-          attractionType: ['entertainment', 'market', 'exhibition', 'sport'],
-          image:
-            'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-          description:
-            'Ullam officia, numquam, expedita cupiditate voluptatibus dolores esse quidem architecto sed nulla magni laudantium facere! Earum?',
-          location: 'Bath',
-          website: '',
-        },
-      ],
     }
   },
   computed: {
+    attractions() {
+      return this.data.attraction.map((attract) => {
+        const tags = attract.attractionType
+          .map((tag) => tag.name)
+          .concat()
+          .flat()
+
+        return {
+          ...attract,
+          tags,
+        }
+      })
+    },
     filteredAttractions() {
       if (this.selectedTag === 'all') {
         return this.attractions
       } else {
         return this.attractions.filter((attraction) => {
-          return attraction.attractionType.includes(this.selectedTag)
+          return attraction.tags.includes(this.selectedTag)
         })
       }
     },
+    filteredTags() {
+      const tagsAll = this.attractions
+        .map((attract) => attract.tags)
+        .concat()
+        .flat()
+
+      return this.data.attractionType.filter((tag) => {
+        return tagsAll.includes(tag.name)
+      })
+    },
+  },
+  mounted() {
+    // console.log(this.attractions)
   },
 }
 </script>
@@ -156,7 +167,7 @@ main {
     margin-top: calc(var(--margin-spacing) * 2);
   }
   p {
-    &:nth-child(2) {
+    &:nth-child(1) {
       font-size: var(--h4-sizing);
       line-height: calc(var(--h4-sizing) * 1.1);
     }

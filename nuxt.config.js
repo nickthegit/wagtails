@@ -23,7 +23,7 @@ export default {
   css: ['~/assets/scss/_all.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ['~/plugins/sanity-image-builder.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -32,7 +32,12 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
+    '@nuxtjs/sanity/module',
   ],
+  sanity: {
+    projectId: process.env.SANITY_ID,
+    dataset: 'production',
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [

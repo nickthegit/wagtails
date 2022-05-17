@@ -1,16 +1,31 @@
 <template>
   <main>
-    <h1>
-      <span>Beautiful</span> 2 Bedroom, Detached Country Holiday Let in
-      <span>Stunning</span> Dorset
-    </h1>
-    <elements-image-grid-layout />
+    <SanityContent :blocks="data.heading" />
+    <elements-image-grid-layout>
+      <img
+        v-for="asset in data.backgroundImageGallery"
+        :key="asset._key"
+        :src="$imgUrl(asset).width(500).url()"
+        alt="generic image of wagtails"
+        loading="lazy"
+      />
+    </elements-image-grid-layout>
   </main>
 </template>
 
 <script>
+// const query = `{
+//   "settings" : *[_type == "settings"],
+//   "contact" : *[_type == 'contact'],
+// }`
+const query = `*[_type == "home"]`
 export default {
   name: 'IndexPage',
+  async asyncData({ $sanity }) {
+    const req = await $sanity.fetch(query)
+    return { data: req[0] }
+  },
+  mounted() {},
 }
 </script>
 
