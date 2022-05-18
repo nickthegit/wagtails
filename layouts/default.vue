@@ -28,14 +28,14 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: this.data[0].description,
+          content: this.desc,
         },
         { hid: 'og-type', property: 'og:type', content: 'website' },
         { hid: 'og-title', property: 'og:title', content: this.data[0].title },
         {
           hid: 'og-desc',
           property: 'og:description',
-          content: this.data[0].description,
+          content: this.desc,
         },
         {
           hid: 'og-image',
@@ -63,7 +63,7 @@ export default {
         {
           hid: 'twitter-description',
           name: 'twitter:description',
-          content: this.data[0].description,
+          content: this.desc,
         },
         {
           hid: 'twitter-image',
@@ -80,8 +80,35 @@ export default {
       ],
     }
   },
+  computed: {
+    desc() {
+      return this.toPlainText(this.data[0].description)
+    },
+  },
   mounted() {
     console.log('mounted', this.data[0])
+
+    console.log('PLAIN TEXT', this.desc)
+  },
+  methods: {
+    toPlainText(blocks = []) {
+      return (
+        blocks
+          // loop through each block
+          .map((block) => {
+            // if it's not a text block with children,
+            // return nothing
+            if (block._type !== 'block' || !block.children) {
+              return ''
+            }
+            // loop through the children spans, and join the
+            // text strings
+            return block.children.map((child) => child.text).join('')
+          })
+          // join the paragraphs leaving split by two linebreaks
+          .join('\n\n')
+      )
+    },
   },
 }
 </script>
