@@ -23,7 +23,7 @@
     <a
       id="book-now"
       class="btn"
-      href="https://www.airbnb.co.uk/rooms/51009780"
+      :href="bookingUrl"
       target="_blank"
       rel="noopener noreferrer"
       >Book Now</a
@@ -34,6 +34,12 @@
 <script>
 export default {
   name: 'HeaderComponent',
+  props: {
+    bookingUrl: {
+      type: String,
+      default: 'https://www.airbnb.co.uk/rooms/51009780',
+    },
+  },
 }
 </script>
 
