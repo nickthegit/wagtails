@@ -84,6 +84,10 @@ export default {
   fill: var(--white);
   margin: 0 20px;
   padding: 10px;
+  @media screen and (max-width: 420px) {
+    margin: 0 10px;
+    width: 35px;
+  }
 }
 .swiper-button-prev,
 .swiper-button-next {
