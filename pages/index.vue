@@ -32,8 +32,8 @@ export default {
 <style lang="scss" scoped>
 main {
   width: 100%;
-  height: 100vh;
-  position: relative;
+  height: 100%;
+  position: fixed;
   padding: var(--edge-spacing);
   display: flex;
   align-items: center;
