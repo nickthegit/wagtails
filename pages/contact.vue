@@ -41,7 +41,7 @@ export default {
     return {
       script: [
         {
-          src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCMUBQALWGVEAYpBS3ESgWn78abnkKE9C8&callback=initMap"',
+          src: `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_API}&callback=initMap`,
           type: 'text/javascript',
           async: true,
           defer: true,
