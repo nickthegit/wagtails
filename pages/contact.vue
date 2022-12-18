@@ -13,13 +13,18 @@
           <SanityContent :blocks="data.directions" />
         </section>
       </section>
-      <aside keep-alive>
-        <iframe
-          src="https://snazzymaps.com/embed/394089"
-          width="100%"
-          height="600px"
-          style="border: none"
-        ></iframe>
+      <aside>
+        <a
+          href="https://goo.gl/maps/EZDq6Sqs9BNhruz26"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <nuxt-img
+            src="/wagtailsmap.png"
+            :placeholder="15"
+            sizes="sm:100vw md:100vw lg:50vw"
+          />
+        </a>
       </aside>
     </article>
   </main>
@@ -36,18 +41,6 @@ export default {
   data() {},
   mounted() {
     // console.log(this.data)
-  },
-  head() {
-    return {
-      script: [
-        {
-          src: `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_API}&callback=initMap`,
-          type: 'text/javascript',
-          async: true,
-          defer: true,
-        },
-      ],
-    }
   },
 }
 </script>
@@ -107,6 +100,12 @@ aside {
   grid-row: 1 / 2;
   grid-column: 2 / 3;
   height: 600px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
 }
 @media screen and (max-width: 1024px) {
   article {

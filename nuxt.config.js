@@ -37,6 +37,7 @@ export default {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     '@nuxtjs/sanity/module',
+    '@nuxt/image',
   ],
   sanity: {
     projectId: process.env.SANITY_ID,

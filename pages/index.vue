@@ -48,6 +48,8 @@ h1 {
   display: block;
   font-size: var(--h1-sizing);
   z-index: 2;
+  background: var(--background-color);
+  padding: 20px;
   span {
     color: var(--color-primary);
   }

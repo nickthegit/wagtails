@@ -19,7 +19,7 @@ section {
   z-index: 1;
   top: 0;
   left: 0;
-  opacity: 0.25;
+  opacity: 1;
   // overflow: scroll;
 }
 .imgae-grid-wrap {
